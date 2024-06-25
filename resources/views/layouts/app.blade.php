@@ -63,7 +63,7 @@
                             <a class="nav-link" href="{{ route('carrinho.index') }}">Comprar</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Pricing</a>
+                            <a class="nav-link" href="{{ route('venda.index') }}">Relatorio de venda</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">

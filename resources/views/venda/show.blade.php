@@ -14,18 +14,21 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Numero da venda</th>
-                    <th>Valor Total</th>
+                    <th>Produtos</th>
+                    <th>Valor do produto</th>
+                    <th>Quantidade</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($vendas as $venda)
+                @foreach($venda as $v)
                     <tr>
-                        <td><a class="" href="{{route('venda.show', $venda->id_tbl_venda)}}">#{{ $venda->id_tbl_venda }}</a></td>         
-                        <td>R$: {{ $venda->valor_total }}</td>                                       
+                        <td>{{$v->nome_produto}}</td>         
+                        <td>R$: {{ $v->preco_produto }}</td>   
+                        <td>{{$v->quantidade}} </td>                                   
                     </tr>        
                 @endforeach      
             </tbody>
+            <td>Valor total: {{$venda[0]->valor_total}}</td>
         </table>                       
                                
             </tbody>

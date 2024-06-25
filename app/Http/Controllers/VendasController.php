@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Venda;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class VendasController extends Controller
 {
     function index()
     {
-        $venda = Venda::all();
-
-        return view('venda.index')->with('venda', $venda);
+    
+        $vendas = Venda::all();   
+        return view('venda.index')
+        ->with('vendas', $vendas);
     }
     function create()
     {
@@ -29,7 +31,15 @@ class VendasController extends Controller
     }
     function show($id)
     {
-        $venda = Venda::find($id);
+        $query = DB::table("tbl_venda")
+        ->join("tbl_carrinho","fk_tbl_carrinho_tbl_venda","tbl_carrinho.id_tbl_carrinho")
+        ->join("tbl_produto_carrinho","tbl_produto_carrinho.id_tbl_carrinho","tbl_carrinho.id_tbl_carrinho")
+        ->join("tbl_produto","tbl_produto_carrinho.id_tbl_produto","tbl_produto.id_tbl_produto")
+        ->where("tbl_venda.id_tbl_venda",$id);
+
+        
+        $venda = $query->get();
+        
         return view('venda.show', compact('venda'));
     }
     function edit($id)

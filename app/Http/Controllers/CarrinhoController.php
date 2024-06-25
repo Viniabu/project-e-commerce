@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Carrinho;
 use App\Models\Produto;
 use App\Models\ProdutoCarrinho;
+use App\Models\Venda;
 use Illuminate\Support\Facades\DB;
 
 class CarrinhoController extends Controller
@@ -32,7 +33,11 @@ class CarrinhoController extends Controller
         DB::beginTransaction();
         try {
         $carrinho = Carrinho::create([
-            'valor_total' => $request->input("valor_total")
+            'valor_total' => $request->input('valor_total')
+        ]);
+        Venda::firstOrCreate([
+            'fk_tbl_carrinho_tbl_venda' => $carrinho->id_tbl_carrinho,
+            'valor_total' => $request->input('valor_total')
         ]);
     
         foreach ($produtos['id_tbl_produto'] as $k => $produto){
@@ -47,7 +52,7 @@ class CarrinhoController extends Controller
         DB::rollBack();
     }
 
-        return redirect()->route('carrinho.index');
+        return redirect()->route('produto.index');
     }
 
     function checkout(Request $request){

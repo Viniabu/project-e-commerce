@@ -3,6 +3,7 @@
 use App\Http\Controllers\CarrinhoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\VendasController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -22,3 +23,6 @@ Route::delete('produtos/destroy/{id}' ,[ProdutoController::class,'destroy'])->na
 Route::get('carrinho/index', [CarrinhoController::class,'index'])->name('carrinho.index');
 Route::post('carrinho/store', [CarrinhoController::class,'store'])->name('carrinho.store');
 Route::post('carrinho/checkout',[CarrinhoController::class,'checkout'])->name('carrinho.checkout');
+
+Route::get('vendas/index', [VendasController::class,'index'])->name('venda.index');
+Route::get('vendas/show/{id}', [VendasController::class,'show'])->name('venda.show');
